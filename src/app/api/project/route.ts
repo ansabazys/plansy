@@ -52,37 +52,3 @@ export async function DELETE(req: NextRequest) {
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    await DBConnect();
-    const { formData, id, action } = await req.json();
-    const projectId = await params.id
-    const project = await Project.findById(projectId);
-
-    console.log(project);
-
-    if (action === "addTodo") {
-      project.tasks = [...project.tasks, formData];
-      project.save();
-    }
-
-    console.log(project);
-
-    // if (action === "updateStatus") {
-    //   const tasks = project.tasks.find((data: Task) => data._id === id)
-    // }
-
-    return NextResponse.json(project, { status: 200 });
-  } catch (error: unknown) {
-    console.error(error);
-    if (error instanceof Error) {
-      return NextResponse.json(
-        { error: error.message || "Something went wrong" },
-        { status: 500 }
-      );
-    }
-  }
-}

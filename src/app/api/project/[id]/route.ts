@@ -5,12 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: {params: Promise<{id: string}>}
 ) {
   try {
     await DBConnect();
     const { formData, taskId, action } = await req.json();
-    const { id } = await params;
+    const { id } = await context.params;
     const project = await Project.findById(id);
 
     console.log(formData);
