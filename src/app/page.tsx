@@ -1,14 +1,8 @@
-"use client"
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
-import { SessionProvider } from "next-auth/react";
-import DashboardPage from "./dashboard/page";
+
 
 export default function Home() {
-  return (
-    <div>
-      <SessionProvider>
-        <DashboardPage />
-      </SessionProvider>
-    </div>
-  );
-}
+  redirect("/dashboard")
+} 

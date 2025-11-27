@@ -12,19 +12,18 @@ interface IForm {
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState<IForm>({
     email: "",
     password: "",
   });
 
-  const router = useRouter();
+  const router = useRouter()
 
 
-  const handleGoogle = async() => {
-    await signIn("google", {callbackUrl: "/"})
-  }
-
+  const handleGoogle = async () => {
+    await signIn("google", { callbackUrl: "/dashboard" });
+  };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -34,14 +33,14 @@ export default function LoginPage() {
       password: formData.password,
     });
 
-    console.log(result)
+    console.log(result);
 
     if (result?.status === 401) {
-      setError("Please check email and password")
+      setError("Please check email and password");
     } else {
       console.log("Login successful");
       // Optionally redirect manually
-      router.push("/");
+      router.push("/dashboard");
     }
 
     console.log(result);
@@ -81,7 +80,10 @@ export default function LoginPage() {
 
           {/* Social Login Buttons */}
           <div className="grid gap-4 mb-6">
-            <button onClick={handleGoogle} className="bg-white hover:bg-gray-50 text-gray-900 rounded-lg py-3 px-4 flex items-center justify-center gap-2 transition-colors border border-gray-200 shadow-sm">
+            <button
+              onClick={handleGoogle}
+              className="bg-white hover:bg-gray-50 text-gray-900 rounded-lg py-3 px-4 flex items-center justify-center gap-2 transition-colors border border-gray-200 shadow-sm"
+            >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
                   fill="#EA4335"

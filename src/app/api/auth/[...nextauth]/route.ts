@@ -7,7 +7,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise, {
     databaseName: "kanban",
     collections: {
@@ -49,6 +49,7 @@ const authOptions: NextAuthOptions = {
           user.password
         );
 
+        console.log(user)
 
         if (!isValid) return null;
 
